@@ -1,0 +1,25 @@
+{
+  "title": "Provenance for Leibniz University Hannover image",
+  "claim_generator": "echolot-demo/0.1",
+  "assertions": [
+    {
+      "label": "c2pa.actions",
+      "data": {
+        "actions": [
+          {
+            "action": "c2pa.created",
+            "when": "2013-04-20T00:00:00Z",
+            "softwareAgent": "Wikimedia Commons"
+          }
+        ]
+      }
+    },
+    {
+      "label": "c2pa.rights",
+      "data": {
+        "rights": "CC BY-SA 3.0",
+        "url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      }
+    }
+  ]
+}
