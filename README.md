@@ -49,6 +49,14 @@ iiif/
 ```
 
 ---
+## 🔧 Setup
+
+Create Conda env
+```bash
+conda env create -f environment.yml
+conda activate Provenance-Aware-Metadata
+```
+---
 
 ## ▶️ How to Run (Phase 1)
 
