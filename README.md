@@ -1,6 +1,6 @@
-# Provenance-Aware Metadata for a Cultural Heritage Image (Phase 1)
+# Provenance-Aware Metadata (Phase 1)
 
-This prototype demonstrates how cultural heritage images can be enriched with **standards-based metadata**, validated against **custom policy rules**, and embedded with **C2PA provenance claims**, before being served via APIs and a **IIIF manifest**.
+This prototype demonstrates how digital assets can be enriched with **standards-based metadata**, validated against **custom policy rules**, and embedded with **C2PA provenance claims**, before being served via APIs and a **IIIF manifest**.
 
 It is developed as a **Phase 1 manual workflow**, with future phases focusing on automation and integration.
 
@@ -104,7 +104,7 @@ conda activate Provenance-Aware-Metadata
   - Integrate SHACL rules into API responses.  
 
 - **Phase 3: Integration**
-  - Plug into real cultural heritage platforms (Europeana, Wikimedia Commons APIs).  
+  - Plug into external platforms (e.g., Europeana for cultural heritage, Zenodo for scientific datasets).
   - Expand metadata to cover PREMIS, EDM, and IIIF Annotations.  
   - Implement secure key management for C2PA (replace dev signer).  
 
