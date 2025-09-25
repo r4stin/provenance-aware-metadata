@@ -55,7 +55,7 @@ iiif/
 1. **Download the source image (Wikimedia Commons)**  
    ```bash
    mkdir -p data
-   wget -O data/image.jpg "https://upload.wikimedia.org/wikipedia/commons/9/95/Leibniz_University_Hannover.jpg"
+   wget -O data/image.jpg "https://upload.wikimedia.org/wikipedia/commons/e/ea/Leibniz_University_Hannover.jpg"
    ```
 
 2. **Validate metadata (SHACL policy check)**  
