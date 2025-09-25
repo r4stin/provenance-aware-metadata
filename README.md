@@ -92,8 +92,6 @@ conda activate Provenance-Aware-Metadata
    - [http://127.0.0.1:8000/image](http://127.0.0.1:8000/image) → signed image  
    - [http://127.0.0.1:8000/iiif/manifest](http://127.0.0.1:8000/iiif/manifest) → IIIF manifest  
 
-   Try loading the manifest in a IIIF viewer (e.g., [Mirador](https://iiif.io/viewers/mirador/)).
-
 ---
 
 ## 🚧 Roadmap (Next Phases)
