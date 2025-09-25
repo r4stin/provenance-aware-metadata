@@ -1,0 +1,37 @@
+# -------------------
+# Logs & caches
+# -------------------
+*.log
+*.out
+*.err
+*.cache
+*.tmp
+*.swp
+*.swo
+*.DS_Store
+
+# -------------------
+# IDE & editor configs
+# -------------------
+.idea/
+*.iml
+
+# -------------------
+# C2PA demo credentials
+# -------------------
+dev.key
+dev.crt
+dev.pem
+
+# -------------------
+# Data (optional)
+# -------------------
+# Ignore local images except the canonical demo one
+data/*.jpg
+!data/image.jpg
+
+# -------------------
+# OS
+# -------------------
+.DS_Store
+Thumbs.db
