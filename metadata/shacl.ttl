@@ -1,0 +1,51 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix dc:   <http://purl.org/dc/terms/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix edm:  <http://www.europeana.eu/schemas/edm/> .
+@prefix schema: <http://schema.org/> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# Validate Provided Cultural Heritage Object
+[] a sh:NodeShape ;
+   sh:targetClass edm:ProvidedCHO ;
+
+   # Must have a title
+   sh:property [
+     sh:path dc:title ;
+     sh:minCount 1 ;
+   ] ;
+
+   # Must state rights (free text like "CC BY 4.0" allowed)
+   sh:property [
+     sh:path dc:rights ;
+     sh:minCount 1 ;
+   ] ;
+
+   # Must include a proper license URL (policy rule)
+   sh:property [
+     sh:path schema:license ;
+     sh:minCount 1 ;
+     sh:nodeKind sh:IRI ;
+     sh:pattern "^https://creativecommons\\.org/licenses/.+/$" ;
+     sh:message "schema:license must be a Creative Commons URL (e.g., https://creativecommons.org/licenses/by/4.0/)" ;
+   ] ;
+
+   # If provided, format should look like an image MIME
+   sh:property [
+     sh:path dc:format ;
+     sh:pattern "^image\\/(jpeg|png|tiff)$" ;
+     sh:message "dc:format should be a common image MIME type (image/jpeg, image/png, image/tiff)." ;
+   ] ;
+
+   # Provenance agent must be present
+   sh:property [
+     sh:path prov:wasAttributedTo ;
+     sh:minCount 1 ;
+   ] ;
+
+   # Timestamp should be xsd:dateTime
+   sh:property [
+     sh:path prov:generatedAtTime ;
+     sh:datatype xsd:dateTime ;
+     sh:message "prov:generatedAtTime must be an xsd:dateTime." ;
+   ] .
