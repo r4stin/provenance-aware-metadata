@@ -5,19 +5,27 @@
     "schema": "http://schema.org/",
     "prov": "http://www.w3.org/ns/prov#",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
-    "schema:license": { "@id": "http://schema.org/license", "@type": "@id" },
+    "schema:license": {
+      "@id": "http://schema.org/license",
+      "@type": "@id"
+    },
     "id": "@id",
     "type": "@type"
   },
+  "type": [
+    "edm:ProvidedCHO",
+    "schema:CreativeWork"
+  ],
   "id": "https://commons.wikimedia.org/wiki/File:Leibniz_University_Hannover.jpg",
-  "type": ["edm:ProvidedCHO", "schema:CreativeWork"],
   "dc:title": "Leibniz University Hannover",
   "dc:creator": "Wikimedia Commons contributor",
   "dc:date": "2013",
   "dc:rights": "CC BY-SA 3.0",
   "dc:format": "image/jpeg",
   "schema:contentUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/Leibniz_University_Hannover.jpg",
-  "schema:license": { "@id": "https://creativecommons.org/licenses/by-sa/3.0/" },
+  "schema:license": {
+    "@id": "https://creativecommons.org/licenses/by-sa/3.0/"
+  },
   "prov:wasDerivedFrom": {
     "id": "https://commons.wikimedia.org/wiki/File:Leibniz_University_Hannover.jpg",
     "type": "prov:Entity",
