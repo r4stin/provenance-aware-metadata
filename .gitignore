@@ -22,6 +22,8 @@
 dev.key
 dev.crt
 dev.pem
+*.crt
+*.key
 
 # -------------------
 # Data (optional)
