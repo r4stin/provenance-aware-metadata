@@ -1,4 +1,6 @@
-.PHONY: build validate sign serve info
+.PHONY: all build validate sign serve info
+
+all: build validate sign serve
 
 build:
 	python src/build_metadata.py
