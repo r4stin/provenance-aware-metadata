@@ -1,9 +1,8 @@
 from fastapi import FastAPI
-from fastapi.responses import FileResponse, JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 import json
-import os
 
-app = FastAPI(title="ECHOLOT Provenance Demo")
+app = FastAPI(title="Provenance Metadata (Phase 2)")
 
 @app.get("/record")
 def get_record():
@@ -14,20 +13,30 @@ def get_record():
 def get_image():
     return FileResponse("data/image.c2pa.jpg", media_type="image/jpeg")
 
-# --- IIIF helpers ---
 @app.get("/iiif/manifest")
-def get_manifest():
-    return FileResponse("iiif/manifest.json", media_type="application/json")
-
-@app.get("/iiif/canvas/{cid}")
-def get_canvas(cid: str):
-    # simple stub to please some IIIF viewers; optional
-    return JSONResponse({"id": f"http://127.0.0.1:8000/iiif/canvas/{cid}", "type": "Canvas"})
-
-@app.get("/iiif/page/{pid}")
-def get_page(pid: str):
-    return JSONResponse({"id": f"http://127.0.0.1:8000/iiif/page/{pid}", "type": "AnnotationPage"})
-
-@app.get("/iiif/anno/{aid}")
-def get_anno(aid: str):
-    return JSONResponse({"id": f"http://127.0.0.1:8000/iiif/anno/{aid}", "type": "Annotation"})
+def iiif_manifest():
+    with open("metadata/record.jsonld") as f:
+        rec = json.load(f)
+    label = rec.get("dc:title", "Asset")
+    return JSONResponse({
+        "@context": "http://iiif.io/api/presentation/3/context.json",
+        "id": "http://127.0.0.1:8000/iiif/manifest",
+        "type": "Manifest",
+        "label": {"en": [f"{label} (C2PA signed)"]},
+        "items": [{
+            "id": "http://127.0.0.1:8000/iiif/canvas/1",
+            "type": "Canvas",
+            "width": 1920, "height": 1080,
+            "items": [{
+                "id": "http://127.0.0.1:8000/iiif/page/1",
+                "type": "AnnotationPage",
+                "items": [{
+                    "id": "http://127.0.0.1:8000/iiif/anno/1",
+                    "type": "Annotation",
+                    "motivation": "painting",
+                    "target": "http://127.0.0.1:8000/iiif/canvas/1",
+                    "body": {"id": "http://127.0.0.1:8000/image", "type": "Image", "format": "image/jpeg"}
+                }]
+            }]
+        }]
+    })
