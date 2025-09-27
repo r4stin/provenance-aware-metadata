@@ -1,0 +1,14 @@
+.git
+.venv
+__pycache__/
+*.pyc
+*.pyo
+*.log
+data/*
+!data/image.jpg
+certs/*
+.devcontainer/
+.gitignore
+Dockerfile
+README.md
+environment.yml
