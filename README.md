@@ -156,6 +156,7 @@ docker run --rm -p 8000:8000 -v "$(pwd)/data:/app/data" provenance-metadata:dev
 ## 🚧 CI (validation only)
 An example GitHub Actions workflow runs **SHACL validation** on push/PR to keep metadata compliant.  
 Enable it in `.github/workflows/validate.yml`, and ensure it targets your branches (e.g., `main`, `dev`).
+![Validate Metadata](https://github.com/r4stin/provenance-aware-metadata/actions/workflows/validate.yml/badge.svg)
 
 ---
 
