@@ -26,5 +26,13 @@ def serve():
 def info():
     subprocess.check_call(["c2patool", "data/image.c2pa.jpg", "--info"])
 
+@cli.command(help="Fetch from Wikimedia Commons and build JSON-LD")
+@click.option("--title", required=True, help='Commons title, e.g. "File:Leibniz_University_Hannover.jpg"')
+def build_from_commons(title):
+    subprocess.check_call([sys.executable, "src/fetch_commons.py", title])
+    subprocess.check_call([sys.executable, "src/build_metadata.py"])
+    subprocess.check_call([sys.executable, "src/validate_metadata.py"])
+
+
 if __name__ == "__main__":
     cli()
