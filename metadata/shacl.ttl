@@ -4,24 +4,19 @@
 @prefix edm:  <http://www.europeana.eu/schemas/edm/> .
 @prefix schema: <http://schema.org/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix premis: <http://www.loc.gov/premis/rdf/v3#> .
 
-# Validate Provided Cultural Heritage Object
+# Provided Cultural Heritage Object (EDM)
 [] a sh:NodeShape ;
    sh:targetClass edm:ProvidedCHO ;
 
-   # Must have a title
-   sh:property [
-     sh:path dc:title ;
-     sh:minCount 1 ;
-   ] ;
+   # title required
+   sh:property [ sh:path dc:title ; sh:minCount 1 ] ;
 
-   # Must state rights (free text like "CC BY 4.0" allowed)
-   sh:property [
-     sh:path dc:rights ;
-     sh:minCount 1 ;
-   ] ;
+   # rights statement text (human-readable)
+   sh:property [ sh:path dc:rights ; sh:minCount 1 ] ;
 
-   # Must include a proper license URL (policy rule)
+   # license URL (policy: must be Creative Commons)
    sh:property [
      sh:path schema:license ;
      sh:minCount 1 ;
@@ -30,22 +25,36 @@
      sh:message "schema:license must be a Creative Commons URL (e.g., https://creativecommons.org/licenses/by/4.0/)" ;
    ] ;
 
-   # If provided, format should look like an image MIME
+   # format should be a common image mime
    sh:property [
      sh:path dc:format ;
      sh:pattern "^image\\/(jpeg|png|tiff)$" ;
      sh:message "dc:format should be a common image MIME type (image/jpeg, image/png, image/tiff)." ;
    ] ;
 
-   # Provenance agent must be present
-   sh:property [
-     sh:path prov:wasAttributedTo ;
-     sh:minCount 1 ;
-   ] ;
+   # provenance agent present
+   sh:property [ sh:path prov:wasAttributedTo ; sh:minCount 1 ] ;
 
-   # Timestamp should be xsd:dateTime
+   # generatedAtTime typed
    sh:property [
      sh:path prov:generatedAtTime ;
      sh:datatype xsd:dateTime ;
      sh:message "prov:generatedAtTime must be an xsd:dateTime." ;
+   ] .
+
+# PREMIS: at least one preservation event (optional but recommended)
+# If present, validate minimal structure
+[] a sh:NodeShape ;
+   sh:targetObjectsOf premis:hasEvent ;
+   sh:property [
+     sh:path premis:eventType ;
+     sh:minCount 1 ;
+   ] ;
+   sh:property [
+     sh:path premis:eventDateTime ;
+     sh:datatype xsd:dateTime ;
+   ] ;
+   sh:property [
+     sh:path premis:hasEventOutcome ;
+     sh:minCount 1 ;
    ] .
