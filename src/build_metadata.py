@@ -1,3 +1,4 @@
+# src/build_metadata.py
 import yaml, json, sys
 from pathlib import Path
 
@@ -17,10 +18,20 @@ TEMPLATE = {
   "type": ["edm:ProvidedCHO", "schema:CreativeWork"]
 }
 
+def _normalize_cc_url(url: str) -> str:
+    if not isinstance(url, str):
+        return url
+    url = url.strip()
+    if url.startswith("https://creativecommons.org/licenses/") and not url.endswith("/"):
+        url += "/"
+    return url
+
 def main():
     if not SRC.exists():
         sys.exit("Missing metadata/source.yml")
     data = yaml.safe_load(SRC.read_text())
+
+    license_url = _normalize_cc_url(data.get("license_url", ""))
 
     rec = TEMPLATE.copy()
     rec["id"] = data["id"]
@@ -30,7 +41,7 @@ def main():
     rec["dc:rights"] = data["rights_text"]
     rec["dc:format"] = data["format"]
     rec["schema:contentUrl"] = data["content_url"]
-    rec["schema:license"] = {"@id": data["license_url"]}
+    rec["schema:license"] = {"@id": license_url}
     rec["prov:wasDerivedFrom"] = {
         "id": data["id"],
         "type": "prov:Entity",
