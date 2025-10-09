@@ -18,18 +18,18 @@
   ],
   "id": "https://commons.wikimedia.org/wiki/File:Leibniz_University_Hannover.jpg",
   "dc:title": "Leibniz University Hannover",
-  "dc:creator": "Wikimedia Commons contributor",
-  "dc:date": "2013",
-  "dc:rights": "CC BY-SA 3.0",
+  "dc:creator": "Harshiitart",
+  "dc:date": "2014-08-09T16:27:40Z",
+  "dc:rights": "CC BY-SA 4.0",
   "dc:format": "image/jpeg",
-  "schema:contentUrl": "https://upload.wikimedia.org/wikipedia/commons/9/95/Leibniz_University_Hannover.jpg",
+  "schema:contentUrl": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Leibniz_University_Hannover.jpg",
   "schema:license": {
-    "@id": "https://creativecommons.org/licenses/by-sa/3.0/"
+    "@id": "https://creativecommons.org/licenses/by-sa/4.0/"
   },
   "prov:wasDerivedFrom": {
-    "id": "https://commons.wikimedia.org/wiki/File:Leibniz_University_Hannover.jpg",
+    "id": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Leibniz_University_Hannover.jpg",
     "type": "prov:Entity",
-    "dc:description": "Original file from Wikimedia Commons"
+    "dc:description": "Downloaded binary from Wikimedia Commons"
   },
   "prov:wasAttributedTo": {
     "id": "https://commons.wikimedia.org",
@@ -37,7 +37,7 @@
     "schema:name": "Wikimedia Commons"
   },
   "prov:generatedAtTime": {
-    "@value": "2013-04-20T00:00:00Z",
+    "@value": "2025-10-09T17:46:18Z",
     "@type": "xsd:dateTime"
   }
 }
