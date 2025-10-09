@@ -5,6 +5,29 @@ from datetime import datetime, timezone
 from pathlib import Path
 import requests
 import yaml
+import re
+
+def strip_html(s: str) -> str:
+    if not isinstance(s, str):
+        return s
+    return re.sub(r"<[^>]+>", "", s).strip()
+
+def normalize_cc_url(url: str) -> str:
+    if not isinstance(url, str):
+        return url
+    url = url.strip()
+    if url.startswith("https://creativecommons.org/licenses/") and not url.endswith("/"):
+        url += "/"
+    return url
+
+def to_iso_datetime(s: str) -> str:
+    if not isinstance(s, str) or not s.strip():
+        return s
+    s = s.strip()
+    m = re.match(r"(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2}:\d{2})", s)
+    if m:
+        return f"{m.group(1)}T{m.group(2)}Z"
+    return s
 
 API = "https://commons.wikimedia.org/w/api.php"
 
@@ -74,19 +97,28 @@ def fetch_commons_file(title: str) -> dict:
         or str(datetime.now().date())
     )
 
+    creator_raw = (M("Artist") or ii.get("user") or "Unknown")
+    license_raw = M("LicenseUrl") or M("UsageTerms") or "https://creativecommons.org/licenses/by-sa/4.0"
+    date_raw = (M("DateTimeOriginal") or M("DateTime") or (ii.get("timestamp") or "")[:19])
+
+    creator_clean = strip_html(creator_raw)
+    license_clean = normalize_cc_url(license_raw)
+    date_clean = to_iso_datetime(date_raw)
+
     src = {
         "id": f"https://commons.wikimedia.org/wiki/{title}",
         "title": (M("ObjectName") or title.replace("File:", "")).strip(),
-        "creator": (M("Artist") or ii.get("user") or "Unknown").strip(),
-        "date": dt,
-        "rights_text": rights_text,
-        "license_url": license_url or "https://creativecommons.org/licenses/by-sa/4.0/",
+        "creator": creator_clean,
+        "date": date_clean,
+        "rights_text": (M("LicenseShortName") or M("Credit") or M("UsageTerms") or "Unknown"),
+        "license_url": license_clean,
         "format": ii.get("mime", "image/jpeg"),
         "content_url": ii["url"],
         "provenance_agent_id": "https://commons.wikimedia.org",
         "provenance_agent_label": "Wikimedia Commons",
         "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
     }
+
     return src
 
 def main():
