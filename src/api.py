@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from fastapi.responses import JSONResponse, FileResponse
 import json
 import subprocess, shutil
+import os
 
 app = FastAPI(title="Provenance Metadata (Phase 2)")
 
