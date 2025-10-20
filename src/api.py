@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse, FileResponse
 import json
+import subprocess, shutil
 
 app = FastAPI(title="Provenance Metadata (Phase 2)")
 
@@ -40,3 +41,19 @@ def iiif_manifest():
             }]
         }]
     })
+
+
+@app.get("/verify")
+def verify():
+    # ensure c2patool present
+    if not shutil.which("c2patool"):
+        return JSONResponse({"status":"error","message":"c2patool not on PATH"}, status_code=500)
+    path = "data/image.c2pa.jpg"
+    if not os.path.exists(path):
+        return JSONResponse({"status":"error","message":"signed asset not found"}, status_code=404)
+    # run c2patool --detailed and return stdout
+    try:
+        out = subprocess.check_output(["c2patool", path, "--detailed"], text=True)
+        return JSONResponse({"status":"ok","report": out})
+    except subprocess.CalledProcessError as e:
+        return JSONResponse({"status":"error","message": e.output or str(e)}, status_code=500)
