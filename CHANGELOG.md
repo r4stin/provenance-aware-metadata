@@ -1,3 +1,19 @@
+All notable changes to this project will be documented here.
+
+## [v0.3] - 2025-10-20
+### Added
+- **Wikimedia Commons integration**: `src/fetch_commons.py` and CLI `build-from-commons` to fetch metadata + image and auto-build/validate.
+- **Richer SHACL policies**: extended shapes for **EDM** and **PREMIS** (event struct & `xsd:dateTime` checks).
+- **Verification endpoint**: `/verify` returns `c2patool --detailed` report for the signed image.
+- **GHCR publish workflow**: `.github/workflows/docker-publish.yml` builds and pushes Docker image on `v*` tags.
+- **Tests in CI**: `tests/test_build_and_validate.py` with pytest; workflow runs tests after validation.
+- **Builder normalizations**: strip HTML from creator, ISO-8601 datetime, ensure CC license URL trailing `/`, and use the binary URL as `prov:wasDerivedFrom`.
+
+### Changed
+- `README.md` updated for Phase 3 (Commons fetch, PREMIS/EDM rules, `/verify`, GHCR usage, tests).
+- `api.py` extended to expose `/verify`.
+- `build_metadata.py` improved normalization and provenance clarity.
+
 ## [v0.2] - 2025-09-27
 ### Added
 - CLI (`src/cli.py`) with commands: `build`, `validate`, `sign`, `serve`, `info`.
