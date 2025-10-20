@@ -152,7 +152,7 @@ docker run --rm -p 8000:8000 ghcr.io/<owner>/<repo>:v0.3
 - **Publish to GHCR**: `.github/workflows/docker-publish.yml` builds & pushes on tags `v*`.
 
 Badge:
-![Validate Metadata](https://github.com/<your-username>/<your-repo>/actions/workflows/validate.yml/badge.svg)
+![Validate Metadata](https://github.com/r4stin/provenance-aware-metadata/actions/workflows/validate.yml/badge.svg)
 
 ---
 
