@@ -59,4 +59,4 @@ dependencies:
       - wcwidth==0.2.14
       - zipp==3.23.0
       - PyYAML==6.0
-
+      - pytest==8.3.3

@@ -27,6 +27,12 @@ jobs:
         shell: bash -l {0}
         run: python src/validate_metadata.py
 
+      - name: Run tests
+        shell: bash -l {0}
+        run: |
+          pip install pytest
+          pytest -q
+
       # Optional: smoke test FastAPI imports
       - name: Import API
         shell: bash -l {0}
